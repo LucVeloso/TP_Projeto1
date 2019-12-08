@@ -105,6 +105,8 @@ Listas::Listas(QWidget *parent)
             compras[chave].push_back(temp);
         }
 
+        arquivo.close();
+
         int linhas = ui->tabelaMostrarSalvosCompras->rowCount();
 
         ui->tabelaMostrarSalvosCompras->insertRow(linhas);
@@ -145,6 +147,8 @@ Listas::Listas(QWidget *parent)
 
             tarefas[chave].push_back(temp);
         }
+
+        arquivo.close();
 
         int linhas = ui->tabelaMostrarSalvosTarefas->rowCount();
 
@@ -189,6 +193,8 @@ Listas::Listas(QWidget *parent)
             templatesCompras[chave].push_back(temp);
         }
 
+        arquivo.close();
+
         int linhas = ui->tabelaMostrarTemplateCompras->rowCount();
 
         ui->tabelaMostrarTemplateCompras->insertRow(linhas);
@@ -229,6 +235,8 @@ Listas::Listas(QWidget *parent)
 
             templatesTarefas[chave].push_back(temp);
         }
+
+        arquivo.close();
 
         int linhas = ui->tabelaMostrarTemplateTarefas->rowCount();
 
