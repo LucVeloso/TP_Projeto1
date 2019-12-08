@@ -30,6 +30,7 @@ public:
     ~Listas();
 
     QString tirarExt(QString &a);
+    void carregar();
 ////////////////////////////////////////////////
     void atualizarCompras();
     void atualizarEstatisticasLCompras();

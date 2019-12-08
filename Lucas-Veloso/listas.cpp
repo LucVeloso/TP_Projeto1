@@ -70,188 +70,193 @@ Listas::Listas(QWidget *parent)
     ui->btn_home_ListaTarefas->setIcon(btn);
     ui->btn_home_ListasSalvas->setIcon(btn);
 
-/////////////////////////////////////////////CARREGAR COMPRAS////////////////////////////////////////////////////////////////////
-{//Carregar Compras Salvas
-
-    QDir directory(pastaComprasSalvas);
-
-    QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
-
-    for(auto &mudar : entrada){
-
-        QFile arquivo(pastaComprasSalvas + mudar);
-
-        arquivo.open(QIODevice::ReadOnly);
-
-        QString linha;
-
-        QStringList dados;
-
-        QString chave = tirarExt(mudar);
-
-        while(!arquivo.atEnd()){
-            Compras temp;
-
-            linha = arquivo.readLine();
-            dados = linha.split(",");
-
-            if(dados[0] == "V") temp.setCheck(true);
-            else temp.setCheck(false);
-
-            temp.setId(dados[1].toInt());
-            temp.setNome(dados[2]);
-            temp.setQuantidade(dados[3].toInt());
-            temp.setPreco(dados[4].toFloat());
-
-            compras[chave].push_back(temp);
-        }
-
-        arquivo.close();
-
-        int linhas = ui->tabelaMostrarSalvosCompras->rowCount();
-
-        ui->tabelaMostrarSalvosCompras->insertRow(linhas);
-        ui->tabelaMostrarSalvosCompras->setItem(linhas, 0, new QTableWidgetItem(chave));
-    }
-
-}
-/////////////////////////////////////////////CARREGAR TAREFAS////////////////////////////////////////////////////////////////////
-{//Carregar Tarefas Salvas
-
-    QDir directory(pastaTarefasSalvas);
-
-    QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
-
-    for(auto &mudar : entrada){
-
-        QFile arquivo(pastaTarefasSalvas + mudar);
-
-        arquivo.open(QIODevice::ReadOnly);
-
-        QString linha;
-
-        QStringList dados;
-
-        QString chave = tirarExt(mudar);
-
-        while(!arquivo.atEnd()){
-            Compras temp;
-
-            linha = arquivo.readLine();
-            dados = linha.split(",");
-
-            if(dados[0] == "V") temp.setCheck(true);
-            else temp.setCheck(false);
-
-            temp.setId(dados[1].toInt());
-            temp.setNome(dados[2]);
-
-            tarefas[chave].push_back(temp);
-        }
-
-        arquivo.close();
-
-        int linhas = ui->tabelaMostrarSalvosTarefas->rowCount();
-
-        ui->tabelaMostrarSalvosTarefas->insertRow(linhas);
-        ui->tabelaMostrarSalvosTarefas->setItem(linhas, 0, new QTableWidgetItem(chave));
-    }
-
-}
-////////////////////////////////////////CARREGAR COMPRAS TEMPLATES///////////////////////////////////////////////////////////////
-{//Carregar Compras Template
-
-    QDir directory(pastaComprasTemplate);
-
-    QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
-
-    for(auto &mudar : entrada){
-
-        QFile arquivo(pastaComprasTemplate + mudar);
-
-        arquivo.open(QIODevice::ReadOnly);
-
-        QString linha;
-
-        QStringList dados;
-
-        QString chave = tirarExt(mudar);
-
-        while(!arquivo.atEnd()){
-            Compras temp;
-
-            linha = arquivo.readLine();
-            dados = linha.split(",");
-
-            if(dados[0] == "V") temp.setCheck(true);
-            else temp.setCheck(false);
-
-            temp.setId(dados[1].toInt());
-            temp.setNome(dados[2]);
-            temp.setQuantidade(dados[3].toInt());
-            temp.setPreco(dados[4].toFloat());
-
-            templatesCompras[chave].push_back(temp);
-        }
-
-        arquivo.close();
-
-        int linhas = ui->tabelaMostrarTemplateCompras->rowCount();
-
-        ui->tabelaMostrarTemplateCompras->insertRow(linhas);
-        ui->tabelaMostrarTemplateCompras->setItem(linhas, 0, new QTableWidgetItem(chave));
-    }
-
-}
-////////////////////////////////////////CARREGAR TAREFAS TEMPLATES///////////////////////////////////////////////////////////////
-{//Carregar Tarefas Template
-
-    QDir directory(pastaTarefasTemplate);
-
-    QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
-
-    for(auto &mudar : entrada){
-
-        QFile arquivo(pastaTarefasTemplate + mudar);
-
-        arquivo.open(QIODevice::ReadOnly);
-
-        QString linha;
-
-        QStringList dados;
-
-        QString chave = tirarExt(mudar);
-
-        while(!arquivo.atEnd()){
-            Compras temp;
-
-            linha = arquivo.readLine();
-            dados = linha.split(",");
-
-            if(dados[0] == "V") temp.setCheck(true);
-            else temp.setCheck(false);
-
-            temp.setId(dados[1].toInt());
-            temp.setNome(dados[2]);
-
-            templatesTarefas[chave].push_back(temp);
-        }
-
-        arquivo.close();
-
-        int linhas = ui->tabelaMostrarTemplateTarefas->rowCount();
-
-        ui->tabelaMostrarTemplateTarefas->insertRow(linhas);
-        ui->tabelaMostrarTemplateTarefas->setItem(linhas, 0, new QTableWidgetItem(chave));
-    }
-
-}
+    carregar();
 
 }
 
 Listas::~Listas()
 {
     delete ui;
+}
+
+void Listas::carregar(){
+
+    /////////////////////////////////////////////CARREGAR COMPRAS////////////////////////////////////////////////////////////////////
+    {//Carregar Compras Salvas
+
+        QDir directory(pastaComprasSalvas);
+
+        QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
+
+        for(auto &mudar : entrada){
+
+            QFile arquivo(pastaComprasSalvas + mudar);
+
+            arquivo.open(QIODevice::ReadOnly);
+
+            QString linha;
+
+            QStringList dados;
+
+            QString chave = tirarExt(mudar);
+
+            while(!arquivo.atEnd()){
+                Compras temp;
+
+                linha = arquivo.readLine();
+                dados = linha.split(",");
+
+                if(dados[0] == "V") temp.setCheck(true);
+                else temp.setCheck(false);
+
+                temp.setId(dados[1].toInt());
+                temp.setNome(dados[2]);
+                temp.setQuantidade(dados[3].toInt());
+                temp.setPreco(dados[4].toFloat());
+
+                compras[chave].push_back(temp);
+            }
+
+            arquivo.close();
+
+            int linhas = ui->tabelaMostrarSalvosCompras->rowCount();
+
+            ui->tabelaMostrarSalvosCompras->insertRow(linhas);
+            ui->tabelaMostrarSalvosCompras->setItem(linhas, 0, new QTableWidgetItem(chave));
+        }
+
+    }
+    /////////////////////////////////////////////CARREGAR TAREFAS////////////////////////////////////////////////////////////////////
+    {//Carregar Tarefas Salvas
+
+        QDir directory(pastaTarefasSalvas);
+
+        QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
+
+        for(auto &mudar : entrada){
+
+            QFile arquivo(pastaTarefasSalvas + mudar);
+
+            arquivo.open(QIODevice::ReadOnly);
+
+            QString linha;
+
+            QStringList dados;
+
+            QString chave = tirarExt(mudar);
+
+            while(!arquivo.atEnd()){
+                Compras temp;
+
+                linha = arquivo.readLine();
+                dados = linha.split(",");
+
+                if(dados[0] == "V") temp.setCheck(true);
+                else temp.setCheck(false);
+
+                temp.setId(dados[1].toInt());
+                temp.setNome(dados[2]);
+
+                tarefas[chave].push_back(temp);
+            }
+
+            arquivo.close();
+
+            int linhas = ui->tabelaMostrarSalvosTarefas->rowCount();
+
+            ui->tabelaMostrarSalvosTarefas->insertRow(linhas);
+            ui->tabelaMostrarSalvosTarefas->setItem(linhas, 0, new QTableWidgetItem(chave));
+        }
+
+    }
+    ////////////////////////////////////////CARREGAR COMPRAS TEMPLATES///////////////////////////////////////////////////////////////
+    {//Carregar Compras Template
+
+        QDir directory(pastaComprasTemplate);
+
+        QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
+
+        for(auto &mudar : entrada){
+
+            QFile arquivo(pastaComprasTemplate + mudar);
+
+            arquivo.open(QIODevice::ReadOnly);
+
+            QString linha;
+
+            QStringList dados;
+
+            QString chave = tirarExt(mudar);
+
+            while(!arquivo.atEnd()){
+                Compras temp;
+
+                linha = arquivo.readLine();
+                dados = linha.split(",");
+
+                if(dados[0] == "V") temp.setCheck(true);
+                else temp.setCheck(false);
+
+                temp.setId(dados[1].toInt());
+                temp.setNome(dados[2]);
+                temp.setQuantidade(dados[3].toInt());
+                temp.setPreco(dados[4].toFloat());
+
+                templatesCompras[chave].push_back(temp);
+            }
+
+            arquivo.close();
+
+            int linhas = ui->tabelaMostrarTemplateCompras->rowCount();
+
+            ui->tabelaMostrarTemplateCompras->insertRow(linhas);
+            ui->tabelaMostrarTemplateCompras->setItem(linhas, 0, new QTableWidgetItem(chave));
+        }
+
+    }
+    ////////////////////////////////////////CARREGAR TAREFAS TEMPLATES///////////////////////////////////////////////////////////////
+    {//Carregar Tarefas Template
+
+        QDir directory(pastaTarefasTemplate);
+
+        QStringList entrada = directory.entryList(QStringList() << "*.csv", QDir::Files);
+
+        for(auto &mudar : entrada){
+
+            QFile arquivo(pastaTarefasTemplate + mudar);
+
+            arquivo.open(QIODevice::ReadOnly);
+
+            QString linha;
+
+            QStringList dados;
+
+            QString chave = tirarExt(mudar);
+
+            while(!arquivo.atEnd()){
+                Compras temp;
+
+                linha = arquivo.readLine();
+                dados = linha.split(",");
+
+                if(dados[0] == "V") temp.setCheck(true);
+                else temp.setCheck(false);
+
+                temp.setId(dados[1].toInt());
+                temp.setNome(dados[2]);
+
+                templatesTarefas[chave].push_back(temp);
+            }
+
+            arquivo.close();
+
+            int linhas = ui->tabelaMostrarTemplateTarefas->rowCount();
+
+            ui->tabelaMostrarTemplateTarefas->insertRow(linhas);
+            ui->tabelaMostrarTemplateTarefas->setItem(linhas, 0, new QTableWidgetItem(chave));
+        }
+
+    }
 }
 
 QString Listas::tirarExt(QString &a){
@@ -391,6 +396,8 @@ void Listas::on_btnSalvarListaComprasTemplate_clicked()
     }
 
     arquivo.close();
+
+    carregar();
 }
 
 
@@ -420,6 +427,8 @@ void Listas::on_btnSalvarListaCompras_clicked()
     }
 
     arquivo.close();
+
+    carregar();
 }
 
 void Listas::on_btnAddCompras_clicked()
@@ -668,6 +677,8 @@ void Listas::on_btnSalvarListaTarefasTemplate_clicked()
     }
 
     arquivo.close();
+
+    carregar();
 }
 
 void Listas::on_btnSalvarListaTarefas_clicked()
@@ -694,6 +705,8 @@ void Listas::on_btnSalvarListaTarefas_clicked()
     }
 
     arquivo.close();
+
+    carregar();
 }
 
 void Listas::on_btnAddTarefas_clicked()
