@@ -1,6 +1,6 @@
 #include "listas.h"
 #include "ui_listas.h"
-#include <QDebug>
+
 
 Listas::Listas(QWidget *parent)
     : QMainWindow(parent)
@@ -15,9 +15,8 @@ Listas::Listas(QWidget *parent)
 
     QDir pasta(pastaPadrao);
 
-    qDebug() << pastaPadrao;
-
-    pasta.mkdir(pastaPadrao + "Listas Salvas/Compras Salvas");
+    pasta.mkdir("Listas Salvas");
+    pasta.mkdir("Listas Salvas/Compras Salvas");
     pasta.mkdir("Listas Salvas/Tarefas Salvas");
     pasta.mkdir("Listas Salvas/Compras Template");
     pasta.mkdir("Listas Salvas/Tarefas Template");
