@@ -48,7 +48,7 @@ Clicando no botão "Adicionar item", abrira uma pequena janela aonde o usuário 
 
 ![enter image description here](https://github.com/LucVeloso/TP_Projeto1/blob/master/Imagens/AdicionarItemNaTabela.png)
 
-### Salvar
+## Salvar
 
 Ambas as tabelas contam em seus cabeçalhos com as opções de "Salvar" e "Salvar template".
 Salvar: cria um arquivo .csv na pasta documentos com o nome da tabela que o usuário informou na sua criação, o arquivo contem todas as informações da tabela.
