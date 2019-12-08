@@ -17,7 +17,7 @@ Listas::Listas(QWidget *parent)
 
     qDebug() << pastaPadrao;
 
-    pasta.mkdir(pastaPadrao + "Listas Salvas/Compras Salvas");
+    pasta.mkdir("Listas Salvas/Compras Salvas");
     pasta.mkdir("Listas Salvas/Tarefas Salvas");
     pasta.mkdir("Listas Salvas/Compras Template");
     pasta.mkdir("Listas Salvas/Tarefas Template");

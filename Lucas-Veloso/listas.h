@@ -101,6 +101,7 @@ private:
 
     bool salvo;
     bool add;
+    bool oculto;
 
     int idCompras = 0;
     int idTarefas = 0;
